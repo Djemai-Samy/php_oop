@@ -71,13 +71,32 @@
           function setNom($newNom){
             $this -> nom = $newNom;
           }
+
+          static function whoAreYou(){
+            echo '<p>Je suis une fonction statique de la classe Personne</p>';
+          }
+
+          static function affichePersonnes($tabPersonne){
+            echo "<h2>Liste des peronnes</h2>";
+            
+            foreach($tabPersonne as $key => $personne){
+              echo '<p>'.$personne -> getNom().'</p>';
+            }
+            
+            echo "<h2>-------</h2>";
+          }
         }
+
+        Personne::whoAreYou();
 
         $personne1 = new Personne("Djemai", "Samy");
         $personne1 -> disBonjour();
-        
+        $personne1 -> whoAreYou();
+
         $personne2 = new Personne("Doe", "John");
         $personne2 -> disBonjour();   
+
+        Personne::affichePersonnes([$personne1, $personne2]);
 
         // Exercice:
         //1. Créer une classe 'User' avec constructeur qui possede:
@@ -134,7 +153,6 @@
         }
         
       }
-      
       //2. Instancier deux objets de type User
        $user1 = new User("Sam", "sam.djm93@gmail.com", "123456", "/Hero/Image_samy_djemai.svg");
        var_dump($user1);
@@ -158,6 +176,14 @@
       //Dans la classe User.
       //1. Modifier le scope des props pour etre en private
       //2. Ajouter 3 getters et 3 setters: (username, email, avatarURL).
+      
+      //Exercice 2:
+      //Implémenter une fonction statique dans la classe User:
+      // function afficherUsers([User]): void
+      //1. La fonction prend en paramètre un tableau d'objet de type 'User'.
+      //2. Utiliser une boucle pour afficher l'email, et avatar de chaque objet
+      
+
       ?>
     </div>
 
