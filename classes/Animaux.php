@@ -17,7 +17,6 @@ abstract class Animal{
 
   public function setNom($nom): self{
     $this->nom = $nom;
-
     return $this;
   }
 
@@ -26,22 +25,36 @@ abstract class Animal{
     return $this->age;
   }
 
-  public function setAge($age): self
-  {
+  public function setAge(int $age): self{
     $this->age = $age;
 
     return $this;
   }
 
   abstract function sayHello();
+  
 }
 
 
 class Dog extends Animal{
- function sayHello(){
+  //Le mot clé 'final' ne permet le ovveride d'une fonction (proprietes)
+  final function sayHello(){
+
+  self::whoAreYou();
   echo "<p>".$this -> getNom()." a dit woof</p>";
  }
+
+ static function whoAreYou(){
+  echo "<p>Je suis un chien</p>";
+ }
 }
+
+class Caniche extends Dog{
+  // function sayHello(){
+  //   echo "<p>".$this -> getNom()." a dit waf</p>";
+  // }
+}
+
 
 class Cat extends Animal{
   function sayHello(){

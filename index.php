@@ -129,13 +129,19 @@
         $dog1 = new Dog("Snow", 7);
         $cat1 = new Cat("Felix", 2);
         $bird1 = new Bird("Titi", 1);
+        $caniche1 = new Caniche("Toto", 1);
+
+        $dog1->setNom("Scoobi") -> setAge(5);
+
         function afficheAnimals($anumauxTab){
           foreach($anumauxTab as $key => $val){
             $val -> sayHello();
           }
         }
 
-        afficheAnimals([$dog1, $cat1, $bird1])
+        afficheAnimals([$dog1, $cat1, $bird1, $caniche1]);
+        Dog::whoAreYou();
+        
       ?>
     </div>
 
