@@ -1,3 +1,10 @@
+<?php
+  include_once "./classes/Personne.php";
+  include_once "./classes/User.php";
+  include_once "./classes/Formes.php";
+  include_once "./classes/Animaux.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -40,53 +47,6 @@
     <div>
       <h2>Les classe avec constructeur</h2>
       <?php
-        class Personne{
-          private $prenom;
-          private $nom;
-
-          function __construct($unNom, $unPrenom){
-            $this->prenom = $unPrenom;
-            $this->nom = $unNom;
-          }
-          
-          function disBonjour(){
-            echo "<p>Salut je suis " . $this -> prenom . " </p>";
-          }
-          //Getter/Accesseur de la propriete prenom
-          function getPrenom(){
-            return $this -> prenom;
-          }
-
-          //Getter/Accesseur de la propriete nom
-          function getNom(){
-            return $this -> nom;
-          }
-
-          //setter/Mutateur de la propriete prenom
-          function setPrenom($newPrenom){
-            $this -> prenom = $newPrenom;
-          }
-
-          //setter/Mutateur de la propriete nom
-          function setNom($newNom){
-            $this -> nom = $newNom;
-          }
-
-          static function whoAreYou(){
-            echo '<p>Je suis une fonction statique de la classe Personne</p>';
-          }
-
-          static function affichePersonnes($tabPersonne){
-            echo "<h2>Liste des peronnes</h2>";
-            
-            foreach($tabPersonne as $key => $personne){
-              echo '<p>'.$personne -> getNom().'</p>';
-            }
-            
-            echo "<h2>-------</h2>";
-          }
-        }
-
         Personne::whoAreYou();
 
         $personne1 = new Personne("Djemai", "Samy");
@@ -100,59 +60,8 @@
 
         // Exercice:
         //1. Créer une classe 'User' avec constructeur qui possede:
-        class User{
-          //  1.1. les propriétés: username, email, password, avatarURL:
-          private $username;
-          private $email;
-          private $password;
-          private $avatarURL;
 
-          function __construct($leUsername, $leEmail, $lePassword, $avatarURL){
-            $this -> username = $leUsername;
-            $this -> email = $leEmail;
-            $this -> password = $lePassword;
-            $this -> avatarURL = $avatarURL;
-          }
 
-        //1.2. Deux méthodes: 
-        
-        //disBonjour(): (Affiche le username)
-        function disBonjour(){
-          echo '<p>' . $this->username . '</p>';
-        }
-
-        //changeUsername(newUsername): (Permet de modifier le username)
-        function changeUsername($newUsername){
-          $this -> username = $newUsername;
-        }
-
-        //Les Getters: pour lire la valeur
-        function getUsername(){
-          return $this -> username;
-        }
-
-        function getEmail(){
-          return $this -> email;
-        }
-
-        function getAvatarURL(){
-          return "https://www.djemai-samy.com".$this -> avatarURL;
-        }
-
-        //Setters: pour modifier la valeur
-        function setUsername($nouvelUsername){
-          $this -> username = $nouvelUsername;
-        }
-
-        function setEmail($nouvelEmail){
-          $this -> email = $nouvelEmail;
-        }
-
-        function setAvatarUrl($nouvelURL){
-          $this -> avatarURL = $nouvelURL;
-        }
-        
-      }
       //2. Instancier deux objets de type User
        $user1 = new User("Sam", "sam.djm93@gmail.com", "123456", "/Hero/Image_samy_djemai.svg");
        var_dump($user1);
@@ -180,10 +89,53 @@
       //Exercice 2:
       //Implémenter une fonction statique dans la classe User:
       // function afficherUsers([User]): void
-      //1. La fonction prend en paramètre un tableau d'objet de type 'User'.
-      //2. Utiliser une boucle pour afficher l'email, et avatar de chaque objet
-      
+      //1. La fonction prend en paramètre un tableau d'objets de type 'User'.
+      //2. Utiliser une boucle pour afficher l'email, et avatar de chaque objet.
+      User::afficheUsers([
+          $user1, 
+          $user2, 
+          new User('Harry',"Harry@Potter.com","potter123", "/Hero/Image_samy_djemai.svg")
+      ]);
+      ?>
+    </div>
 
+    <div>
+      <h2>L'heritage</h2>
+      <?php
+        $rect1 = new Rectangle(10, 20);
+        
+        $rect1 -> setLargeur(20);
+
+        echo '<p>Surface rect1 = '.$rect1 -> getSurface().'cm²</p>';
+
+        $rect2 = new Rectangle(5, 2);
+
+        if($rect1 -> isBigger($rect2)){
+          echo "rect2 est plus grand!";
+        }else{
+          echo "rect1 est plus grand!";
+        }
+
+        $square1 = new Square(10);
+        echo '<p>' . $square1 -> getSurface() . '</p>';
+
+        $tri1 = new Triangle(1, 1, 1);
+        echo '<p>' . $tri1 -> getSurface() . '</p>';
+      ?>
+    </div>
+
+    <div>
+      <?php
+        $dog1 = new Dog("Snow", 7);
+        $cat1 = new Cat("Felix", 2);
+        $bird1 = new Bird("Titi", 1);
+        function afficheAnimals($anumauxTab){
+          foreach($anumauxTab as $key => $val){
+            $val -> sayHello();
+          }
+        }
+
+        afficheAnimals([$dog1, $cat1, $bird1])
       ?>
     </div>
 
@@ -191,12 +143,5 @@
 </html>
 <script>
 
-  function add(a, b){
-    return a + b;
-  }
-
-  console.log(add(1 ,2));
-  console.log(add(5 ,7));
-    
  
 </script>
